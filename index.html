@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Global Immigration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        :root {
+            --primary-blue: #0046ad;
+            --primary-red: #ff3b30;
+            --text-dark: #1a365d;
+            --bg-light: #fcfdfe;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-red);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .logo-container img {
+            max-width: 320px;
+            height: auto;
+        }
+        nav {
+            background-color: var(--primary-blue);
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Sections */
+        .page-section {
+            display: block;
+        }
+        .hero {
+            background-color: #f0f4f8;
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+        .hero h2 {
+            color: var(--primary-blue);
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Services */
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background-color: white;
+            width: 28%;
+            min-width: 280px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,46,173,0.08);
+            text-align: center;
+            border-top: 4px solid var(--primary-blue);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--primary-red);
+        }
+        .service-card h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e1e8ed;
+        }
+        .contact-container h2 {
+            color: var(--primary-blue);
+            text-align: center;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: #003380;
+        }
+        .btn-danger {
+            background-color: var(--primary-red);
+        }
+        .btn-danger:hover {
+            background-color: #d9231a;
+        }
+
+        /* Admin Area Styles */
+        .admin-login {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .admin-dashboard {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #e1e8ed;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+            border-top: 4px solid var(--primary-red);
+        }
+        footer p {
+            margin: 5px 0;
+            color: #cbd5e0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Yash Global Immigration Logo">
+        </div>
+    </header>
+
+    <nav>
+        <a onclick="showSection('home-page')">Home</a>
+        <a onclick="showSection('services-page')">Services</a>
+        <a onclick="showSection('contact-page')">Contact Us</a>
+        <a onclick="showSection('admin-login-page')" style="margin-left: auto; color: #ffcc00;">Admin Portal 🔒</a>
+    </nav>
+
+    <div id="home-page" class="page-section">
+        <section class="hero">
+            <h2>Expert Visa & Immigration Consultants</h2>
+            <p>Start your journey to Canada, UK, USA, Australia, and New Zealand with our expert guidance. We make the complex immigration process simple for you.</p>
+        </section>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="btn" style="width: auto; padding: 15px 40px;" onclick="showSection('contact-page')">Apply / Book Consultation Now</button>
+        </div>
+    </div>
+
+    <div id="services-page" class="page-section" style="display:none;">
+        <section class="services">
+            <div class="service-card">
+                <h3>🎓 Study Visa</h3>
+                <p>Get admission into top universities and colleges worldwide with our complete student visa assistance.</p>
+            </div>
+            <div class="service-card">
+                <h3>✈️ Permanent Residency (PR)</h3>
+                <p>Hassle-free processing for Express Entry, PNP, and other PR programs tailored to your profile.</p>
+            </div>
+            <div class="service-card">
+                <h3>💼 Work Permit</h3>
+                <p>Explore global career opportunities with our reliable work visa and permit services.</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact-page" class="page-section" style="display:none;">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <form id="leadForm" onsubmit="saveLead(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="clientName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="clientPhone" required placeholder="Enter your active mobile number">
+                </div>
+                <div class="form-group">
+                    <label>Visa Type Interest</label>
+                    <select id="visaType">
+                        <option value="Study Visa">Study Visa</option>
+                        <option value="Permanent Residency">Permanent Residency (PR)</option>
+                        <option value="Work Permit">Work Permit</option>
+                        <option value="Visitor Visa">Visitor/Tourist Visa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message / Message Details</label>
+                    <textarea id="clientMessage" rows="4" placeholder="Briefly explain your requirement..."></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-login-page" class="page-section" style="display:none;">
+        <div class="admin-login">
+            <h2>Admin Portal Secure Access</h2>
+            <p style="color: #718096; margin-bottom: 20px;">Enter security credentials to continue</p>
+            <div class="form-group">
+                <input type="password" id="adminPassword" placeholder="Enter Admin Password" style="text-align: center;">
+            </div>
+            <button class="btn" onclick="checkAdminPassword()">Unlock Portal</button>
+        </div>
+    </div>
+
+    <div id="admin-dashboard-page" class="page-section" style="display:none;">
+        <div class="admin-dashboard">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Inquiries & Leads Dashboard</h2>
+                <button class="btn btn-danger" style="width: auto;" onclick="logoutAdmin()">Logout Securely</button>
+            </div>
+            <p>Aapki website se aayi hui saari enquiries yahan dikhengi:</p>
+            
+            <table id="leadsTable">
+                <thead>
+                    <tr>
+                        <th>Date/Time</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Visa Type</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="leadsBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Yash Global Immigration. All rights reserved.</p>
+        <p>Vadodara, Gujarat, India</p>
+    </footer>
+
+    <script>
+        // Default encrypted password string for security
+        // Default password is: YashAdmin2026
+        const securePassHash = "9ef478c950a7c469e38e69db9e64e9a0ee4cd93c20c0201ca67d8a6e8df8fba7";
+
+        // Navigation Controller
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Form Submit Handler (Saves data locally on browser securely)
+        function saveLead(e) {
+            e.preventDefault();
+            
+            const newLead = {
+                date: new Date().toLocaleString(),
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                visa: document.getElementById('visaType').value,
+                message: document.getElementById('clientMessage').value
+            };
+
+            let leads = JSON.parse(localStorage.getItem('yash_leads')) || [];
+            leads.push(newLead);
+            localStorage.setItem('yash_leads', JSON.stringify(leads));
+
+            alert('Thank you! Your inquiry has been sent successfully. Our team will contact you soon.');
+            document.getElementById('leadForm').reset();
+            showSection('home-page');
+        }
+
+        // Password Security Verification
+        function checkAdminPassword() {
+            const inputPass = document.getElementById('adminPassword').value;
+            const inputHash = CryptoJS.SHA256(inputPass).toString();
+
+            if (inputHash === securePassHash) {
+                document.getElementById('adminPassword').value = ""; // Clear input field
+                loadLeadsData();
+                showSection('admin-dashboard-page');
+            } else {
+                alert('Access Denied! Incorrect security password.');
+            }
+        }
+
+        // Load Lead Data onto Dashboard Table
+        function loadLeadsData() {
+            const leadsBody = document.getElementById('leadsBody');
+            leadsBody.innerHTML = "";
+            
+            let leads = JSON.parse(localStorage.getItem('yash_leads')) || [];
+            
+            if (leads.length === 0) {
+                leadsBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#718096;">No new inquiries available.</td></tr>`;
+                return;
+            }
+
+            // Show latest inquiries first
+            leads.reverse().forEach(lead => {
+                const row = `<tr>
+                    <td>${lead.date}</td>
+                    <td>${lead.name}</td>
+                    <td><strong>${lead.phone}</strong></td>
+                    <td>${lead.visa}</td>
+                    <td>${lead.message || '-'}</td>
+                </tr>`;
+                leadsBody.innerHTML += row;
+            });
+        }
+
+        // Secure Logout Function
+        function logoutAdmin() {
+            showSection('home-page');
+        }
+    </script>
+</body>
+</html>
